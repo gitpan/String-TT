@@ -18,7 +18,9 @@ no_index:
     - inc
     - t
 requires: 
+  Carp: 0
   List::Util: 0
   PadWalker: 0
   Sub::Exporter: 0
-version: 0.01
+  Template: 0
+version: 0.02
