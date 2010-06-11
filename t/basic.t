@@ -1,6 +1,7 @@
 use strict;
 use warnings;
-use Test::More tests => 9;
+use Test::More;
+use Test::Exception;
 
 use String::TT qw/tt strip/;
 use utf8;
@@ -19,6 +20,10 @@ Require user jrockway nothingmuch pergirin stevan
 HERE
 is utf_eight(), "ほげぼげ", 'utf8 works';
 is length utf_eight(), 4, 'utf8 works not by coincidence';
+
+throws_ok { fail_and_throw() } qr/parse error/, 'Throws when your TT does not compile';
+
+done_testing;
 
 sub a {
     my $foo = 'foo';
@@ -60,6 +65,11 @@ sub f {
     };
 }
 
+sub fail_and_throw {
+    return tt q{
+        [% END %]
+    };
+}
 
 sub random_work_thing {
     my $users = { 
